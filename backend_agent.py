@@ -37,7 +37,7 @@ def get_generator_agent(api_key: str):
     return Agent(
         name="Scientist Name Finder",
         model=OpenAIChat(
-            id="meta-llama/llama-3.2-3b-instruct",  # Targeted Llama 3.2 model
+            id="meta-llama/llama-3.1-8b-instruct",  # Targeted Llama 3.2 model
             api_key=api_key,
             base_url="https://openrouter.ai/api/v1",
         ),
