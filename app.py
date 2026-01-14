@@ -6,12 +6,28 @@ from backend_agent import get_generator_agent, evaluate_relevance
 st.set_page_config(page_title="AI Scientist Judge", layout="wide")
 st.title("👨‍🔬 AI Scientist Finder & Judge")
 
+# # --- SIDEBAR: API KEY ---
+# with st.sidebar:
+#     st.header("Configuration")
+#     api_key = st.text_input("OpenRouter API Key", type="password")
+    
+#     st.info("Get your key from [OpenRouter](https://openrouter.ai/).")
+#     if api_key:
+#         os.environ["OPENROUTER_API_KEY"] = api_key
 # --- SIDEBAR: API KEY ---
 with st.sidebar:
     st.header("Configuration")
-    api_key = st.text_input("OpenRouter API Key", type="password")
     
-    st.info("Get your key from [OpenRouter](https://openrouter.ai/).")
+    # 1. Check if Key is in Secrets (Cloud)
+    if "OPENROUTER_API_KEY" in st.secrets:
+        st.success("API Key loaded from Secrets! 🔒")
+        api_key = st.secrets["OPENROUTER_API_KEY"]
+    
+    # 2. If not, ask for it manually (Local testing)
+    else:
+        api_key = st.text_input("OpenRouter API Key", type="password")
+        st.info("Get your key from [OpenRouter](https://openrouter.ai/).")
+
     if api_key:
         os.environ["OPENROUTER_API_KEY"] = api_key
 
